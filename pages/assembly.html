@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>组装车间操作手册 - MES操作指导书</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-home-link">
+          <h2 class="sidebar-title">美诗儿 MES 操作指导书</h2>
+        </a>
+      </div>
+      <nav class="sidebar-modules">
+        <ul>
+                <li><a href="../pages/injection.html">🏭 注塑车间操作手册</a></li>
+      <li><a href="../pages/assembly.html" class="active">🏭 组装车间操作手册</a></li>
+      <li><a href="../pages/equipment.html">⚙️ 设备维保操作手册</a></li>
+      <li><a href="../pages/mold.html">🔧 模具维保操作手册</a></li>
+      <li><a href="../pages/quality.html">📋 质量检验操作手册</a></li>
+
+        </ul>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <nav class="sidebar-sections">
+        <div class="sidebar-section-label">本页目录</div>
+        <ul>
+                <li><a href="#scenario">场景说明</a></li>
+      <li><a href="#flowchart">流程图</a></li>
+      <li><a href="#steps">操作步骤说明</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content" id="main-content">
+      <header class="page-header">
+        <h1>组装车间操作手册</h1>
+        <div class="meta-info">部门：生产部</div>
+      </header>
+      <div class="sections">
+              <section class="doc-section" id="scenario">
+        <h2 class="section-title">场景说明</h2>
+        <div class="section-content scenario-content">
+  <p>组装车间通过 MES 系统实现产线派工、人员上工、设备点检及进出站报工的数字化管理。班组长根据生产计划在系统中进行派工作业，将装配工单分配至对应产线；作业人员刷卡或扫码上工，完成产线点检后执行进站/出站报工。</p>
+  <p>本手册详细说明组装车间各操作环节的系统操作步骤及截图对照。</p>
+</div>
+
+      </section>      <section class="doc-section" id="flowchart">
+        <h2 class="section-title">流程图</h2>
+        <div class="section-content flowchart-content">
+<svg class="flowchart-svg" viewBox="0 0 836 172" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1a73e8"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect x="24" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
+  <text x="109" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">1. 派工作业</text>
+  <line x1="194" y1="34" x2="214" y2="34" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.1 进入派工作业界面</text>
+  <line x1="109" y1="48" x2="109" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="82" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="95" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.2 选择加工中心</text>
+  <line x1="109" y1="78" x2="109" y2="82" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="106" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="119" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.3 检查齐套</text>
+  <line x1="109" y1="102" x2="109" y2="106" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="130" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="143" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.4 一键派工</text>
+  <line x1="109" y1="126" x2="109" y2="130" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="230" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
+  <text x="315" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">2. 上工作业</text>
+  <line x1="400" y1="34" x2="420" y2="34" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <rect x="238" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="315" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">2.1 进入产线平台</text>
+  <line x1="315" y1="48" x2="315" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="238" y="82" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="315" y="95" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">2.2 选择报工群组</text>
+  <line x1="315" y1="78" x2="315" y2="82" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="238" y="106" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="315" y="119" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">2.3 多人报同作业站</text>
+  <line x1="315" y1="102" x2="315" y2="106" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="436" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
+  <text x="521" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">3. 产线点检</text>
+  <line x1="606" y1="34" x2="626" y2="34" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <rect x="444" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="521" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.1 执行设备点检</text>
+  <line x1="521" y1="48" x2="521" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="642" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
+  <text x="727" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">4. 报工作业</text>
+  <rect x="650" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="727" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">4.1 进站报工</text>
+  <line x1="727" y1="48" x2="727" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="650" y="82" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="727" y="95" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">4.2 出站报工</text>
+  <line x1="727" y1="78" x2="727" y2="82" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+</svg>
+
+</div>
+
+      </section>      <section class="doc-section" id="steps">
+        <h2 class="section-title">操作步骤说明</h2>
+        <div class="section-content steps-content">
+  <h3 class="step-group-title">1. 派工作业</h3>
+  <div class="sub-step-header">1.1 进入派工作业界面</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-01.png" alt="派工作业入口">
+        <figcaption>派工作业入口</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>登录 MES 系统后，在功能菜单中选择【派工作业】模块，进入派工管理主界面。系统默认显示当前未派工的生产批列表。</div>
+      <div class="step-remark"><strong>备注：</strong>派工菜单权限由后端角色权限控制，如未看到派工菜单请联系管理员配置。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">1.2 选择加工中心</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-02.png" alt="筛选加工中心">
+        <figcaption>筛选加工中心</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>在派工界面中，筛选需要派工的加工中心（如「组装车间」），系统将展示该中心下所有待派工的生产批。支持按工单号、料号、日期等条件快速筛选。</div>
+      <div class="step-remark"><strong>备注：</strong>加工中心在系统基础数据中配置，如列表为空请联系后端维护。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">1.3 检查齐套</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-03.png" alt="齐套检查结果">
+        <figcaption>齐套检查结果</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>选中生产批后，点击「齐套检查」按钮，系统自动校验物料、模具、工艺参数等是否齐套。齐套通过的生产批方可进行派工。</div>
+      <div class="step-remark"><strong>备注：</strong>齐套检查的校验规则在后端「齐套参数设置」中配置。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">1.4 一键派工</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-04.png" alt="一键派工完成">
+        <figcaption>一键派工完成</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>齐套通过后，选中生产批点击「一键派工」，系统自动将工单分配至最优机台。也可手动选择目标机台后点击「派工」完成派工操作。派工成功后，该工单状态更新为「已派工」。</div>
+      <div class="step-remark"><strong>备注：</strong>派工后会将用模信息抛转WMS，AGV送模。</div>
+    </div>
+  </div>
+  <h3 class="step-group-title">2. 上工作业</h3>
+  <div class="sub-step-header">2.1 进入产线平台</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-05.png" alt="产线平台概览">
+        <figcaption>产线平台概览</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>进入作业人员工作平台，系统显示当前登录人有权限的所有机台/产线。点击需要上工的机台旁的❤图标，将该机台加入「我的机台」列表，方便后续快速定位和操作。</div>
+      <div class="step-remark"><strong>备注：</strong>如列表为空，请联系管理员配置账号的产线权限。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">2.2 选择报工群组</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-19.png" alt="报工群组选择">
+        <figcaption>报工群组选择</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>在平台中选择【报工群组】页签，系统展示当前负责的所有机台/产线。选择目标机台确认后完成上工，平台上工图标变为绿色表示上工成功。</div>
+      <div class="step-remark"><strong>备注：</strong>报工群组需要在后端「报工群组设置」中提前维护。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">2.3 多人报同作业站</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-18.png" alt="多人上工状态">
+        <figcaption>多人上工状态</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>当一台设备需要多人同时作业时，支持多人上工至同一作业站。第二名及以上的作业人员直接点击该机台的【上工】按钮，系统允许同站多人在线。平台上工图标变为绿色表示上工成功。</div>
+      <div class="step-remark"><strong>备注：</strong>多人报同站时，每人分别进行报工，产量分别记录。上工后方可进行报工操作，未上工不允许进站报工。</div>
+    </div>
+  </div>
+  <h3 class="step-group-title">3. 产线点检</h3>
+  <div class="sub-step-header">3.1 执行设备点检</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-07.png" alt="点检入口">
+        <figcaption>点检入口</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-08.png" alt="点检项目填写">
+        <figcaption>点检项目填写</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>在作业区工作平台选择已上工的机台，点击【点检】按钮。系统弹出点检窗体，按设备类型自动带出对应点检项目（如温度、压力、安全装置等），逐一填写点检值后点击确定完成点检。</div>
+      <div class="step-remark"><strong>备注：</strong>可设置点检必须通过才允许进站报工。点检项目在后端「设备点检标准」中配置。点检未完成或点检结果为 NG 时，不允许进站报工（取决于后端参数设置）。</div>
+    </div>
+  </div>
+  <h3 class="step-group-title">4. 报工作业</h3>
+  <div class="sub-step-header">4.1 进站报工</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-09.png" alt="进站报工入口">
+        <figcaption>进站报工入口</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/production-assembly/fig-10.png" alt="进站数量录入">
+        <figcaption>进站数量录入</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>点检完成后，在作业平台选择对应产线/设备，点击【进站报工】。进入报工界面后，填入本次进站的生产数量，确认后完成进站报工。进站后该工单状态变为「生产中」。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">4.2 出站报工</div>
+  <div class="step-pair">
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>组装出站由线尾的照相机扫码出站，装箱人员需提前将箱码粘贴到外箱。照相机扫码后，会执行自动出站，无需人工干预。</div>
+      <div class="step-remark"><strong>备注：</strong>出站数量达到产品对应的检验数后，会生成下一张检验单。</div>
+    </div>
+  </div>
+</div>
+
+      </section>
+      </div>
+      <footer class="page-footer">
+        <p>美诗儿（浙江）环境智能电器有限公司 - MES 操作指导书</p>
+        <p class="footer-edit-hint">提示：图片文件位于 <code>images/production-assembly/</code> 目录，替换对应图片即可更新</p>
+      </footer>
+    </main>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设备维保操作手册 - MES操作指导书</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-home-link">
+          <h2 class="sidebar-title">美诗儿 MES 操作指导书</h2>
+        </a>
+      </div>
+      <nav class="sidebar-modules">
+        <ul>
+                <li><a href="../pages/injection.html">🏭 注塑车间操作手册</a></li>
+      <li><a href="../pages/assembly.html">🏭 组装车间操作手册</a></li>
+      <li><a href="../pages/equipment.html" class="active">⚙️ 设备维保操作手册</a></li>
+      <li><a href="../pages/mold.html">🔧 模具维保操作手册</a></li>
+      <li><a href="../pages/quality.html">📋 质量检验操作手册</a></li>
+
+        </ul>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <nav class="sidebar-sections">
+        <div class="sidebar-section-label">本页目录</div>
+        <ul>
+                <li><a href="#scenario">场景说明</a></li>
+      <li><a href="#flowchart">流程图</a></li>
+      <li><a href="#steps">操作步骤说明</a></li>
+      <li><a href="#notes">注意事项</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content" id="main-content">
+      <header class="page-header">
+        <h1>设备维保操作手册</h1>
+        <div class="meta-info">部门：设备部</div>
+      </header>
+      <div class="sections">
+              <section class="doc-section" id="scenario">
+        <h2 class="section-title">场景说明</h2>
+        <div class="section-content scenario-content">
+  <p>设备稼动是 MES 系统中对设备状态进行管理的核心功能。设备发生状态转换（设置→加工中→故障→维修→保养→暂停→关机等）时，通过选择设备进行设备稼动操作，切换目标状态并记录原因，实现设备全生命周期状态追溯与闭环管理。</p>
+  <p>设备稼动操作入口包括：作业人员工作平台、生产管理工作平台、生产线管控平台。设备共有八个稼动状态：设置、加工中、故障、维修、保养、暂停、设置、关机。</p>
+  <p>本手册覆盖设备稼动状态变更操作（含完整闭环流程）及设备保养作业的系统操作步骤。</p>
+  <p>参考文档：PL102 设备稼动管理操作简报</p>
+</div>
+
+      </section>      <section class="doc-section" id="flowchart">
+        <h2 class="section-title">流程图</h2>
+        <div class="section-content flowchart-content">
+<svg class="flowchart-svg" viewBox="0 0 630 172" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#1a73e8"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect x="24" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
+  <text x="109" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">1. 设备稼动</text>
+  <line x1="194" y1="34" x2="214" y2="34" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.1 进入工作平台</text>
+  <line x1="109" y1="48" x2="109" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="82" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="95" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.2 选择设备并执行稼动</text>
+  <line x1="109" y1="78" x2="109" y2="82" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="106" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="119" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.3 确认稼动结果</text>
+  <line x1="109" y1="102" x2="109" y2="106" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="32" y="130" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="109" y="143" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">1.4 设备稼动闭环流程</text>
+  <line x1="109" y1="126" x2="109" y2="130" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="230" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
+  <text x="315" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">2. 设备状态变更场景</text>
+  <line x1="400" y1="34" x2="420" y2="34" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <rect x="238" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="315" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">2.1 设备设置→加工中</text>
+  <line x1="315" y1="48" x2="315" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="238" y="82" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="315" y="95" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">2.2 加工中→故障→维修→加工中（维修闭环）</text>
+  <line x1="315" y1="78" x2="315" y2="82" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="238" y="106" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="315" y="119" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">2.3 加工中→保养→加工中（保养闭环）</text>
+  <line x1="315" y1="102" x2="315" y2="106" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="238" y="130" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="315" y="143" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">2.4 加工中→暂停/关机→加工中</text>
+  <line x1="315" y1="126" x2="315" y2="130" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="436" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
+  <text x="521" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">3. 设备保养作业</text>
+  <rect x="444" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="521" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.1 保养计划设定与下达</text>
+  <line x1="521" y1="48" x2="521" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="444" y="82" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="521" y="95" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.2 执行保养作业</text>
+  <line x1="521" y1="78" x2="521" y2="82" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+</svg>
+
+</div>
+
+      </section>      <section class="doc-section" id="steps">
+        <h2 class="section-title">操作步骤说明</h2>
+        <div class="section-content steps-content">
+  <h3 class="step-group-title">1. 设备稼动</h3>
+  <div class="sub-step-header">1.1 进入工作平台</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-01.png" alt="工作平台设备状态总览">
+        <figcaption>工作平台设备状态总览</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>登录 MES 系统后，进入【作业人员工作平台】（或生产管理工作平台/生产线管控平台），查看当前所有设备的实时状态。设备状态以不同颜色标识：加工中（绿色/蓝色）、故障（红色）、维修（橙色）、保养（黄色）、暂停（紫色）、设置/关机（灰色）等。</div>
+      <div class="step-remark"><strong>备注：</strong>工作平台权限由后端角色权限控制，如未看到对应菜单请联系管理员配置。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">1.2 选择设备并执行稼动</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-02.png" alt="设备稼动操作窗口">
+        <figcaption>设备稼动操作窗口</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-03.png" alt="稼动状态与原因选择">
+        <figcaption>稼动状态与原因选择</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>选择需要进行稼动操作的设备，点击【设备稼动】按钮，弹出稼动操作窗口。在稼动窗口中先勾选要稼动的目标状态（如故障、维修、保养、暂停、设置、关机），然后根据目标状态选择对应的稼动原因。确认后设备状态即时变更并留档记录。</div>
+      <div class="step-remark"><strong>备注：</strong>稼动类型与原因在后端【设备状态原因基础资料】中配置。故障、维修、保养、暂停等状态需要选择稼动原因（必选项）；关机、加工中状态可不用选择原因。设备故障状态切换可结合安灯按板预报警（PL207）；设备维修状态切换通过设备报修（PL201）。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">1.3 确认稼动结果</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-04.png" alt="设备稼动成功状态变更">
+        <figcaption>设备稼动成功状态变更</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>设备稼动成功后，设备状态即时变更并显示对应颜色。例如选择稼动类别=故障，则设备状态变更为故障（红色），同时系统记录该设备的状态变更时间、操作人、变更原因等信息，形成设备状态履历。</div>
+      <div class="step-remark"><strong>备注：</strong>设备状态变更后的结果可在【设备稼动历程日报表】中按日查询每台设备的稼动历程。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">1.4 设备稼动闭环流程</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-05.png" alt="维修状态稼动">
+        <figcaption>维修状态稼动</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-06.png" alt="维修完成恢复加工中状态">
+        <figcaption>维修完成恢复加工中状态</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>设备稼动的核心原则是「闭环」：原状态→目标状态→回归原状态。以设备维修为例，完整闭环流程为：加工中→故障（发生故障）→维修（维修中）→加工中（维修完成恢复生产）。同理，保养、暂停、设置等状态变更均遵循此闭环原则。</div>
+      <div class="step-remark"><strong>备注：</strong>设备在故障、维修、保养、暂停、设置、关机状态期间，无法执行进站报工作业（产线管控平台除外）。设备若接入 IoT 采集，以采集数据为准更新稼动状态。</div>
+    </div>
+  </div>
+  <h3 class="step-group-title">2. 设备状态变更场景</h3>
+  <div class="sub-step-header">2.1 设备设置→加工中</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-07.png" alt="进站加工/切换至加工中">
+        <figcaption>进站加工/切换至加工中</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-08.png" alt="设备设置状态">
+        <figcaption>设备设置状态</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>每日上班时，操作人员在工作平台选择目标设备，点击【设备稼动】，将设备从「设置」状态切换为「加工中」状态。随后执行进站操作（Q状态→R状态），设备状态自动变为加工中（绿色），开始生产加工。</div>
+      <div class="step-remark"><strong>备注：</strong>设备上开始生产作业前需执行进站操作，进站后设备自动切换为加工中状态；生产完成出站后设备自动切换回设置状态。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">2.2 加工中→故障→维修→加工中（维修闭环）</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-09.png" alt="设备故障状态切换">
+        <figcaption>设备故障状态切换</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-10.png" alt="恢复加工中状态">
+        <figcaption>恢复加工中状态</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>生产过程中设备发生故障时，操作人员选择设备执行稼动，将状态从「加工中」切换为「故障」（选择故障原因）。维修人员到达后，将状态从「故障」切换为「维修」（选择维修原因并预计处理时间）。维修完成后，将状态切回「加工中」（填写实际维修时间），完成维修闭环。</div>
+      <div class="step-remark"><strong>备注：</strong>维修状态切换必须经由「故障」状态，不能直接从加工中切换为维修。维修完成只能切换回故障前的状态。故障/维修原因在【设备-原因设定】中绑定。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">2.3 加工中→保养→加工中（保养闭环）</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-11.png" alt="设备保养状态">
+        <figcaption>设备保养状态</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-12.png" alt="保养完成恢复加工中">
+        <figcaption>保养完成恢复加工中</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>当设备到达保养计划时间或需要临时保养时，操作人员选择设备执行稼动，将状态从「加工中」切换为「保养」（选择保养原因并预计保养时长）。保养完成后切回「加工中」，完成保养闭环。若有保养单据，可在保养界面点击蓝色保养单入口查看保养项目和备品备件清单。</div>
+      <div class="step-remark"><strong>备注：</strong>若设备当天存在已下发的保养单据，设备稼动为保养状态时会显示蓝色保养单入口。保养完成后设备需通过稼动回到加工中状态。保养计划在后端【设备保养计划】中设定。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">2.4 加工中→暂停/关机→加工中</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-13.png" alt="设备暂停状态">
+        <figcaption>设备暂停状态</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-14.png" alt="设备关机状态">
+        <figcaption>设备关机状态</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>休息时间或换班时，可将设备从「加工中」切换为「暂停」（选择暂停原因并预计暂停时长），休息结束后切回「加工中」。下班时切换为「关机」状态，次日上班再切回「设置」或「加工中」。</div>
+      <div class="step-remark"><strong>备注：</strong>暂停原因是可选非必填项。关机状态下无法执行生产作业。设备在每个班次结束后建议切换为关机状态，以准确记录设备稼动率。</div>
+    </div>
+  </div>
+  <h3 class="step-group-title">3. 设备保养作业</h3>
+  <div class="sub-step-header">3.1 保养计划设定与下达</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-15.png" alt="设备保养原因设定/计划维护">
+        <figcaption>设备保养原因设定/计划维护</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>设备管理员在 MES 后端【设备管理】→【设备保养计划】功能中设定保养计划。选择需要保养的设备，设定保养周期（按日历时间：每月/每季度；或按运行时长触发），指定保养项目和备品备件清单。保养计划设定并签核后，系统按计划自动下发保养单据到对应设备。当设备到达保养日期时，操作人员在工作平台可看到设备显示待保养标志。</div>
+      <div class="step-remark"><strong>备注：</strong>保养计划设定后，系统根据计划周期自动生成保养工单并推送至对应设备责任人。保养单据包含保养项目明细、使用备品、操作说明等信息。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">3.2 执行保养作业</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/equipment/fig-16.png" alt="设备保养设定/状态变更">
+        <figcaption>设备保养设定/状态变更</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>当设备存在已下发的保养单据时，将设备稼动为「保养」状态后，系统显示蓝色保养单入口。点击进入保养单界面，查看本次保养的所有项目和所需备品备件。点击【开始保养】记录开始时间，逐项完成保养操作并填写保养结果，完成后点击【保养完毕】记录完成时间。保养记录自动更新到设备履历中。</div>
+      <div class="step-remark"><strong>备注：</strong>保养完成后设备需通过稼动回到「加工中」状态。保养记录可在后续报表中追溯查询。</div>
+    </div>
+  </div>
+</div>
+
+      </section>      <section class="doc-section" id="notes">
+        <h2 class="section-title">注意事项</h2>
+        <div class="section-content notes-content">
+  <ul>
+    <li>设备稼动为保养时，必须存在已下发的保养单据才可进行设备保养操作。</li>
+    <li>设备在故障、维修、保养、暂停状态期间，在作业人员/生产管理工作平台上无法执行进站报工作业。</li>
+    <li>设备状态变更遵循「原状态→目标状态→原状态」的闭环原则，维修完成/保养完成只能恢复至变更前的状态。</li>
+    <li>设备稼动状态可安灯按板预报警（故障）或设备报修（维修）触发，详见 PL207/PL201 相关模块。</li>
+  </ul>
+</div>
+
+      </section>
+      </div>
+      <footer class="page-footer">
+        <p>美诗儿（浙江）环境智能电器有限公司 - MES 操作指导书</p>
+        <p class="footer-edit-hint">提示：图片文件位于 <code>images/equipment/</code> 目录，替换对应图片即可更新</p>
+      </footer>
+    </main>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>

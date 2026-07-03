@@ -1,0 +1,617 @@
+/* ============================================================
+   美诗儿 MES 操作指导书 - 全局样式 v3 (Fixed Sidebar)
+   ============================================================ */
+
+:root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --primary-dark: #1557b0;
+    --primary-gradient: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+    --index-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --bg: #f0f2f5;
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #cbd5e1;
+    --sidebar-active: #ffffff;
+    --sidebar-hover: rgba(255,255,255,0.08);
+    --sidebar-width: 260px;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --accent-orange: #f59e0b;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+    --transition: 0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                 "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text); background: var(--bg); line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+a { color: var(--primary); text-decoration: none; transition: color var(--transition); }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; height: auto; display: block; }
+code {
+    font-family: "SFMono-Regular", Consolas, monospace;
+    background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;
+}
+
+/* --- Layout: full viewport height --- */
+.layout, .index-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   Fixed Sidebar
+   ============================================================ */
+.sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+}
+.sidebar-home-link {
+    text-decoration: none;
+    display: block;
+}
+.sidebar-home-link:hover {
+    text-decoration: none;
+}
+.sidebar-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+/* Module navigation (top section) */
+.sidebar-modules {
+    padding: 8px 0;
+    flex-shrink: 0;
+}
+.sidebar-modules ul { list-style: none; }
+.sidebar-modules li { margin: 0; }
+.sidebar-modules a {
+    display: block;
+    padding: 9px 20px;
+    color: var(--sidebar-text);
+    font-size: 0.88rem;
+    border-left: 3px solid transparent;
+    transition: all var(--transition);
+    text-decoration: none;
+    margin: 1px 0;
+}
+.sidebar-modules a:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-active);
+    text-decoration: none;
+}
+.sidebar-modules a.active {
+    background: rgba(26,115,232,0.2);
+    color: var(--sidebar-active);
+    border-left-color: var(--primary);
+    font-weight: 500;
+}
+
+/* Divider */
+.sidebar-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 4px 20px;
+    flex-shrink: 0;
+}
+
+/* Page sections navigation (bottom section) */
+.sidebar-sections {
+    padding: 4px 0 16px;
+    flex: 1;
+}
+.sidebar-section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.4);
+    padding: 12px 20px 6px;
+    font-weight: 600;
+}
+.sidebar-sections ul { list-style: none; }
+.sidebar-sections li { margin: 0; }
+.sidebar-sections a {
+    display: block;
+    padding: 7px 20px 7px 32px;
+    color: #94a3b8;
+    font-size: 0.84rem;
+    border-left: 3px solid transparent;
+    transition: all var(--transition);
+    text-decoration: none;
+    border-radius: 0 4px 4px 0;
+    margin: 1px 8px 1px 0;
+}
+.sidebar-sections a:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-active);
+    text-decoration: none;
+}
+.sidebar-sections a.active {
+    background: rgba(26,115,232,0.2);
+    color: var(--sidebar-active);
+    border-left-color: var(--primary);
+    font-weight: 500;
+}
+
+/* ============================================================
+   Main Content
+   ============================================================ */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    max-width: 100%;
+    overflow-y: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header {
+    padding: 32px 40px 28px;
+    background: var(--primary-gradient);
+    color: #fff;
+    flex-shrink: 0;
+}
+.page-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+.meta-info {
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+/* Index page header */
+.index-header {
+    background: var(--index-gradient);
+}
+.subtitle {
+    font-size: 1.15rem;
+    opacity: 0.92;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+.desc {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    margin-top: 10px;
+    max-width: 640px;
+}
+
+/* --- Sections --- */
+.sections {
+    padding: 28px 40px;
+    width: 100%;
+    flex: 1;
+}
+
+.doc-section {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    padding: 32px;
+    scroll-margin-top: 20px;
+    transition: box-shadow var(--transition);
+    border: 1px solid var(--border);
+}
+.doc-section:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    background: var(--primary);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* --- Scenario --- */
+.scenario-content p {
+    margin-bottom: 12px;
+    text-indent: 2em;
+    line-height: 1.8;
+    color: #334155;
+}
+
+/* --- Flowchart --- */
+.flowchart-content {
+    text-align: center;
+    padding: 8px 0;
+}
+.flowchart-figure { margin: 16px auto; }
+.flowchart-figure figcaption { margin-top: 8px; color: var(--text-light); font-size: 0.9rem; }
+
+/* --- Flow Table --- */
+.flow-table-wrap { overflow-x: auto; margin: 16px 0; }
+.flow-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.flow-table td {
+    border: 1px solid var(--border); padding: 10px 14px; vertical-align: top;
+}
+.flow-table tr:nth-child(even) td { background: #f8fafc; }
+
+/* ============================================================
+   图文配对布局
+   ============================================================ */
+
+/* 操作组标题 */
+.step-group-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 24px 0 16px;
+    padding: 12px 16px;
+    background: #f0f4ff;
+    border-left: 3px solid var(--primary);
+    border-radius: 0 6px 6px 0;
+}
+
+/* 每个图文配对卡片 */
+.step-pair {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 20px;
+    margin-bottom: 16px;
+    background: #fafbfc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all var(--transition);
+}
+.step-pair:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+/* 图片区域 */
+.step-pair-imgs {
+    flex: 0 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 65%;
+}
+.step-figure { margin: 0; text-align: center; flex: 1 1 260px; }
+.step-figure img {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    max-height: 500px;
+    width: 100%;
+    object-fit: contain;
+    background: #fff;
+}
+.step-figure figcaption {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-align: center;
+}
+
+/* 步骤说明文字 */
+.step-pair-text {
+    flex: 1;
+    min-width: 200px;
+}
+.step-label {
+    display: inline-block;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+.step-desc {
+    color: var(--text);
+    font-size: 0.92rem;
+    line-height: 1.8;
+}
+
+/* 纯图片展示（无步骤标签时） */
+.step-pair-img { margin: 8px 0; text-align: center; }
+.step-pair-img img {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    max-height: 350px;
+    display: inline-block;
+}
+.img-caption {
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+}
+
+/* 子步骤标题 */
+.sub-step-header {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    padding: 8px 0 8px 14px;
+    margin: 16px 0 10px;
+    border-left: 3px solid var(--accent-orange);
+    background: #fffbf0;
+    border-radius: 0 6px 6px 0;
+}
+
+/* 备注样式 */
+.step-remark {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #f0f7ff;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    color: #475569;
+    border: 1px solid #e0edff;
+}
+
+/* 占位框（图片缺失时） */
+.placeholder-box {
+    background: #f1f5f9;
+    border: 2px dashed #d1d5db;
+    border-radius: var(--radius);
+    padding: 32px 20px;
+    text-align: center;
+    color: var(--text-light);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.no-image { color: var(--text-light); font-style: italic; padding: 20px; }
+
+/* 图片点击放大 */
+.step-figure img, .flowchart-figure img, .step-pair-img img {
+    cursor: zoom-in;
+    transition: transform 0.2s;
+}
+.step-figure img:hover, .flowchart-figure img:hover, .step-pair-img img:hover {
+    transform: scale(1.02);
+}
+.img-overlay {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    cursor: zoom-out;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.img-overlay.show { display: flex; }
+.img-overlay img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+/* SVG 流程图 */
+.flowchart-svg {
+    margin: 16px auto;
+    display: block;
+    max-width: 100%;
+    max-height: 450px;
+    cursor: zoom-in;
+    transition: transform 0.2s;
+}
+.flowchart-svg:hover {
+    transform: scale(1.02);
+}
+
+/* --- Notes --- */
+.notes-content ul { list-style: none; padding: 0; }
+.notes-content li {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: #fef9e7;
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* --- Footer --- */
+.page-footer {
+    padding: 24px 40px 32px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    background: var(--card-bg);
+}
+.footer-edit-hint {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* ============================================================
+   Module Grid (Index page)
+   ============================================================ */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 28px 40px;
+    width: 100%;
+    flex: 1;
+}
+
+.module-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+}
+.module-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--primary);
+    text-decoration: none;
+}
+
+.card-icon {
+    font-size: 2rem;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    border-radius: 12px;
+    flex-shrink: 0;
+    transition: transform var(--transition);
+}
+.module-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.card-body h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text);
+}
+.card-dept {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* ============================================================
+   Scrollbar Styling
+   ============================================================ */
+.main-content::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.main-content::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.main-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 220px;
+        min-width: 220px;
+    }
+    .main-content {
+        margin-left: 220px;
+    }
+    .page-header {
+        padding: 24px 20px;
+    }
+    .page-header h1 { font-size: 1.3rem; }
+    .sections {
+        padding: 16px 20px;
+    }
+    .doc-section {
+        padding: 20px;
+    }
+    .step-pair {
+        flex-direction: column;
+        padding: 16px;
+    }
+    .step-pair-imgs {
+        max-width: 100%;
+    }
+    .module-grid {
+        padding: 16px 20px;
+        grid-template-columns: 1fr;
+    }
+    .sidebar-modules a {
+        padding: 8px 16px;
+        font-size: 0.84rem;
+    }
+    .sidebar-sections a {
+        padding: 6px 16px 6px 24px;
+    }
+    .page-footer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .layout, .index-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        position: relative;
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        max-height: 300px;
+    }
+    .main-content {
+        margin-left: 0;
+    }
+}
