@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESOP 制作流程 - 从需求到部署</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #f0f4f8; color: #1a202c;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0d47a1 100%);
+    color: #fff; padding: 60px 20px 50px; text-align: center;
+  }
+  .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 8px; letter-spacing: 2px; }
+  .hero .subtitle { font-size: 16px; color: #94a3b8; }
+  .hero .meta { margin-top: 16px; font-size: 13px; color: #64748b; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+  /* Overview cards */
+  .overview-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin: -30px auto 40px; max-width: 960px; padding: 0 20px;
+  }
+  .overview-card {
+    background: #fff; border-radius: 12px; padding: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08); text-align: center;
+    border-top: 4px solid #1a73e8;
+  }
+  .overview-card .num { font-size: 28px; font-weight: 800; color: #1a73e8; }
+  .overview-card .label { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+  /* Phase */
+  .phase { margin-bottom: 24px; }
+  .phase-header {
+    background: #fff; border-radius: 12px; padding: 18px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 16px; cursor: pointer;
+  }
+  .phase-num {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 18px;
+  }
+  .phase-header h2 { font-size: 17px; flex: 1; }
+  .phase-header .time { font-size: 12px; color: #94a3b8; }
+  .phase-body { display: flex; flex-direction: column; gap: 10px; padding-left: 56px; }
+
+  /* Step */
+  .step {
+    background: #fff; border-radius: 10px; padding: 16px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border-left: 4px solid #1a73e8;
+  }
+  .step .title { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .step .title .snum { color: #1a73e8; margin-right: 6px; }
+  .step .desc { font-size: 14px; color: #475569; line-height: 1.7; }
+  .step .desc code {
+    background: #f1f5f9; padding: 2px 6px; border-radius: 4px;
+    font-family: "Consolas", monospace; font-size: 13px; color: #e11d48;
+  }
+  .step .desc .tag {
+    display: inline-block; background: #e8f0fe; color: #1a73e8;
+    padding: 1px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;
+  }
+  .step .tags { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .step .tags span {
+    font-size: 11px; padding: 3px 10px; border-radius: 10px;
+    background: #f1f5f9; color: #64748b;
+  }
+  .step .tags span.tip { background: #fef3c7; color: #92400e; }
+  .step .tags span.file { background: #e8f0fe; color: #1a73e8; }
+  .step .tags span.ok { background: #d1fae5; color: #065f46; }
+
+  .arrow { text-align: center; color: #94a3b8; font-size: 18px; padding: 2px 0; }
+
+  /* Tip box */
+  .tip-box {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 10px;
+    border-left: 4px solid #3b82f6;
+  }
+  .tip-box .tt { font-weight: 700; font-size: 14px; color: #1e40af; margin-bottom: 4px; }
+  .tip-box .dd { font-size: 13px; color: #1e3a5f; line-height: 1.6; }
+
+  /* File tree */
+  .file-tree {
+    background: #1e293b; border-radius: 10px; padding: 20px 24px;
+    color: #e2e8f0; font-family: "Consolas", monospace; font-size: 13px; line-height: 1.8;
+    margin: 12px 0;
+  }
+  .file-tree .d { color: #60a5fa; }
+  .file-tree .f { color: #94a3b8; }
+  .file-tree .h { color: #fbbf24; }
+
+  /* Deployment */
+  .deploy-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px; margin: 8px 0;
+  }
+  .deploy-card {
+    background: #fff; border-radius: 10px; padding: 16px 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04); border-top: 4px solid #1a73e8;
+  }
+  .deploy-card h4 { font-size: 14px; margin-bottom: 6px; }
+  .deploy-card p { font-size: 13px; color: #475569; line-height: 1.5; }
+  .deploy-card .cmd {
+    background: #1e293b; color: #e2e8f0; padding: 6px 10px; border-radius: 6px;
+    font-family: "Consolas", monospace; font-size: 12px; margin-top: 6px;
+  }
+
+  /* Section title */
+  .section-title {
+    font-size: 22px; font-weight: 700; margin: 40px 0 16px;
+    padding-left: 16px; border-left: 4px solid #1a73e8; color: #0f172a;
+  }
+  .section-desc { font-size: 14px; color: #64748b; margin-bottom: 20px; line-height: 1.6; }
+
+  /* Role badges */
+  .role-badges { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; justify-content: center; }
+  .role-badge {
+    background: #fff; border-radius: 10px; padding: 14px 20px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); flex: 1; min-width: 140px;
+  }
+  .role-badge .icon { font-size: 32px; }
+  .role-badge .name { font-size: 13px; font-weight: 600; margin-top: 6px; }
+  .role-badge .desc { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+  /* Footer */
+  footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 13px; }
+
+  @media (max-width: 640px) {
+    .phase-body { padding-left: 0; }
+    .hero h1 { font-size: 24px; }
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>📘 ESOP 制作流程指南</h1>
+  <p class="subtitle">从需求分析 → 内容采集 → 图片处理 → 代码生成 → 部署上线 全流程讲解</p>
+  <p class="meta">适用于：实施顾问 · 售前团队 · 培训讲师 · 项目交接</p>
+</div>
+
+<div class="overview-grid">
+  <div class="overview-card"><div class="num">①</div><div class="label">需求分析<br>确定模块范围</div></div>
+  <div class="overview-card"><div class="num">②</div><div class="label">内容采集<br>提取操作步骤</div></div>
+  <div class="overview-card"><div class="num">③</div><div class="label">图片处理<br">匹配截图内容</div></div>
+  <div class="overview-card"><div class="num">④</div><div class="label">代码开发<br>Python 生成器</div></div>
+  <div class="overview-card"><div class="num">⑤</div><div class="label">内容编写<br>结构化录入</div></div>
+  <div class="overview-card"><div class="num">⑥</div><div class="label">生成校验<br>迭代修正</div></div>
+  <div class="overview-card"><div class="num">⑦</div><div class="label">部署上线<br>发布给客户</div></div>
+</div>
+
+<div class="container">
+
+  <!-- 角色 -->
+  <div class="section-title">👥 参与角色</div>
+  <div class="role-badges">
+    <div class="role-badge"><div class="icon">🧑‍💼</div><div class="name">实施顾问</div><div class="desc">提供操作流程内容</div></div>
+    <div class="role-badge"><div class="icon">🧑‍💻</div><div class="name">开发人员</div><div class="desc">制作生成器/部署</div></div>
+    <div class="role-badge"><div class="icon">🧑‍🔧</div><div class="name">质量管理员</div><div class="desc">审核图文内容</div></div>
+    <div class="role-badge"><div class="icon">👤</div><div class="name">客户</div><div class="desc">验收与反馈</div></div>
+  </div>
+
+  <!-- 总览 -->
+  <div class="section-title">📋 制作流程概览</div>
+  <div class="section-desc">
+    整个 ESOP（电子标准作业程序）制作分为 7 个阶段，从拿到客户需求到最终以网页形式交付给客户。
+    核心思路：<strong>内容结构化 → 模板化生成 → 自动化部署</strong>。
+  </div>
+
+  <!-- Phase 1 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num" style="background:#0d47a1;">1</div>
+      <h2>需求分析 — 确定做哪些模块</h2>
+      <span class="time">输入：客户需求</span>
+    </div>
+    <div class="phase-body">
+      <div class="step">
+        <div class="title"><span class="snum">1.1</span>与客户确认模块清单</div>
+        <div class="desc">
+          与客户开会确定需要制作哪些车间/部门的操作手册。<br>
+          以美诗儿项目为例，最终确定 <span class="tag">5 大模块</span>：
+          🏭 注塑车间 · 🏭 组装车间 · ⚙️ 设备维保 · 🔧 模具维保 · 📋 质量检验<br>
+          剔除的模块：IIoT 设备看板、系统基础配置（客户确认不需要）
+        </div>
+        <div class="tags"><span class="tip">💡 后续可能会新增模块，要预留扩展性</span></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">1.2</span>收集参考材料</div>
+        <div class="desc">
+          从客户处获取制作 ESOP 所需的原始材料：<br>
+          📄 <strong>Word 文档</strong> — 鼎捷标准功能操作说明书（.doc 格式）<br>
+          📄 <strong>PDF 简报</strong> — 标准功能操作简报（如 PL102 设备稼动、PL205 模治具寿命管理）<br>
+          🖼️ <strong>截图素材</strong> — 系统操作界面截图
+        </div>
+        <div class="tags"><span class="tip">💡 材料越完整，制作越高效</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num" style="background:#1565c0;">2</div>
+      <h2>内容采集 — 从文档中提取操作步骤</h2>
+      <span class="time">输入：Word / PDF</span>
+    </div>
+    <div class="phase-body">
+      <div class="step">
+        <div class="title"><span class="snum">2.1</span>Word 文档解析</div>
+        <div class="desc">
+          使用 <code>python-docx</code> 库读取 Word 文档，提取章节标题和操作步骤描述。
+          遇到加密文档可用 <code>olefile</code> + <code>antiword</code> 辅助读取。
+        </div>
+        <div class="tags"><span class="file">python-docx</span><span class="file">antiword</span></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">2.2</span>PDF 参考文档解读</div>
+        <div class="desc">
+          使用 <code>PyMuPDF (fitz)</code> 提取 PDF 文字和图片。<br>
+          关键：逐页分析文字描述，找到与操作步骤匹配的内容，特别注意<span class="tag">闭环流程</span>（如设备稼动闭环、维修闭环、保养闭环）
+        </div>
+        <div class="tags"><span class="file">PyMuPDF</span><span class="file">pdfminer.six</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num" style="background:#1976d2;">3</div>
+      <h2>图片处理 — 提取并匹配截图</h2>
+      <span class="time">难度：⭐⭐⭐</span>
+    </div>
+    <div class="phase-body">
+      <div class="tip-box">
+        <div class="tt">⚠️ 最重要的步骤</div>
+        <div class="dd">图片必须与文字描述对应，这是客户验收时最容易发现问题的地方。方法：找到 PDF 中某操作步骤的文字页 → 提取该页的截图 → 验证截图内容与文字一致。</div>
+      </div>
+      <div class="step">
+        <div class="title"><span class="snum">3.1</span>从 PDF 提取截图</div>
+        <div class="desc">
+          使用 <code>page.get_images()</code> 提取 PDF 中嵌入的图片，筛选出有效截图（排除装饰性元素）。
+          美诗儿项目中从 2 个 PDF 提取了 <span class="tag">140+ 张截图</span>。
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">3.2</span>图文匹配验证</div>
+        <div class="desc">
+          <strong>匹配方法：</strong><br>
+          ① 找到 PDF 中描述某操作的页面 → ② 提取该页主要截图 → ③ 验证截图是否与文字描述一致<br>
+          <strong>示例：</strong>PDF P59 写"在作业人员工作平台找到设备" → 对应 ESOP 步骤 1.1 "进入工作平台"
+        </div>
+        <div class="tags"><span class="tip">💡 客户反馈"图片不对"是最常见的修改项</span></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">3.3</span>图片整理命名</div>
+        <div class="desc">
+          统一命名规则：<code>fig-01.png</code>、<code>fig-02.png</code> 顺序编号。<br>
+          放入对应模块的 <code>images/</code> 子目录。
+        </div>
+        <div class="tags"><span class="file">images/equipment/fig-01~16.png</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num" style="background:#1e88e5;">4</div>
+      <h2>代码开发 — 编写 HTML 生成器</h2>
+      <span class="time">核心：generate.py</span>
+    </div>
+    <div class="phase-body">
+      <div class="step">
+        <div class="title"><span class="snum">4.1</span>设计数据结构和模板</div>
+        <div class="desc">
+          用 Python dict 定义模块内容（CONTENT 变量），包含：<br>
+          <code>title</code> · <code>dept</code> · <code>icon</code> · <code>img_dir</code> · <code>scenario</code> · <code>steps</code> · <code>notes</code><br>
+          HTML 模板使用 <code>str.replace()</code> 渲染
+        </div>
+        <div class="tags"><span class="file">generate.py (~580 行)</span></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">4.2</span>自动生成 SVG 流程图</div>
+        <div class="desc">
+          根据步骤数据自动绘制 <span class="tag">横向流程图</span>：主步骤→子步骤，箭头连线自动计算坐标。<br>
+          支持主步骤之间的水平箭头和主步骤到子步骤的垂直箭头。
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">4.3</span>CSS 样式 + JS 交互</div>
+        <div class="desc">
+          🎨 固定侧边栏导航 · 全宽响应式布局 · 图片点击放大 · 滚动章节高亮<br>
+          🎨 深色主题侧边栏 · 卡片式布局 · 磨砂玻璃效果
+        </div>
+        <div class="tags"><span class="file">css/style.css</span><span class="file">js/main.js</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num" style="background:#2196f3;">5</div>
+      <h2>内容编写 — 结构化录入</h2>
+      <span class="time">最耗时阶段</span>
+    </div>
+    <div class="phase-body">
+      <div class="step">
+        <div class="title"><span class="snum">5.1</span>编写步骤描述</div>
+        <div class="desc">
+          每条步骤包含：<code>id</code>·<code>name</code>·<code>desc</code>(作业说明)·<code>remark</code>(备注)·<code>images</code>(图片列表)<br>
+          描述要<span class="tag">用户看得懂</span>，避免技术术语，用操作人员能理解的语言。
+        </div>
+        <div class="tags"><span class="tip">💡 多和客户确认描述是否准确</span></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">5.2</span>重点：闭环流程设计</div>
+        <div class="desc">
+          设备维保的例子：<br>
+          🔄 <strong>维修闭环：</strong>加工中→故障→维修→加工中<br>
+          🔄 <strong>保养闭环：</strong>加工中→保养→加工中<br>
+          模具维保的例子：<br>
+          🔄 异常发现→叫修→签收→维修作业→完工确认→恢复可用
+        </div>
+        <div class="tags"><span class="tip">💡 闭环思维是客户最看重的</span></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">5.3</span>运行一行命令，生成全部页面</div>
+        <div class="desc">
+          <code>python generate.py</code> → 自动生成所有模块的 HTML 文件到 <code>pages/</code> 目录<br>
+          同时生成首页 <code>index.html</code>（模块卡片导航）
+        </div>
+        <div class="tags"><span class="ok">✅ 一次运行生成 6 个页面</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 6 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num" style="background:#42a5f5;">6</div>
+      <h2>校验与修正 — 迭代优化</h2>
+      <span class="time">循环多次</span>
+    </div>
+    <div class="phase-body">
+      <div class="step">
+        <div class="title"><span class="snum">6.1</span>本地预览校验</div>
+        <div class="desc">
+          ✅ 打开 HTML 页面检查排版<br>
+          ✅ 验证图片加载、图文对应<br>
+          ✅ 检查流程图箭头方向<br>
+          ✅ 验证侧边栏导航
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">6.2</span>客户反馈修正</div>
+        <div class="desc">
+          🔄 客户查看 → 提出修改意见 → 调整内容 → 重新生成 → 再次验证<br>
+          常见的修正：图片不对、步骤描述不准确、缺少某些环节、流程需要调整
+        </div>
+        <div class="tags"><span class="tip">💡 预留 2-3 轮迭代时间</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 7 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num" style="background:#64b5f6;">7</div>
+      <h2>部署上线 — 让客户访问</h2>
+      <span class="time">多种方式</span>
+    </div>
+    <div class="phase-body">
+      <div class="tip-box">
+        <div class="tt">📌 选择方案</div>
+        <div class="dd">根据客户需求选择部署方式。美诗儿项目最终方案：<strong>Git 版本管理 + GitHub + Cloudflare Pages CDN 加速</strong>。</div>
+      </div>
+
+      <div class="deploy-grid">
+        <div class="deploy-card">
+          <h4>📁 方案A：本地服务器</h4>
+          <p>适合开发调试、临时展示，电脑不能关机</p>
+          <div class="cmd">python -m http.server 8000</div>
+        </div>
+        <div class="deploy-card">
+          <h4>🐙 方案B：GitHub Pages</h4>
+          <p>适合国内客户，推送即部署</p>
+          <div class="cmd">git push origin main</div>
+        </div>
+        <div class="deploy-card">
+          <h4>☁️ 方案C：Cloudflare Pages</h4>
+          <p>全球 CDN 加速，自动 HTTPS，推荐正式发布</p>
+          <div class="cmd">连接 Git → 自动部署</div>
+        </div>
+        <div class="deploy-card">
+          <h4>📦 方案D：压缩包发送</h4>
+          <p>最直接，客户解压双击 index.html 即可</p>
+          <div class="cmd">压缩 → 微信/邮件发送</div>
+        </div>
+      </div>
+
+      <div class="step" style="margin-top:12px;">
+        <div class="title"><span class="snum">7.1</span>Git 版本管理</div>
+        <div class="desc">
+          <code>git init</code> → <code>git add -A</code> → <code>git commit -m "描述"</code> → <code>git push</code><br>
+          SSH 密钥认证：<code>ssh-keygen</code> → GitHub Settings 添加公钥 → 免密推送
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">7.2</span>Cloudflare Pages 部署</div>
+        <div class="desc">
+          <strong>两种方式：</strong><br>
+          ① Cloudflare 控制台 → Pages → 连接 Git 仓库 → 自动部署（不需要令牌）<br>
+          ② 命令行：<code>npx wrangler pages deploy . --project-name=xxx</code>（需要 API 令牌）
+        </div>
+        <div class="tags"><span class="ok">✅ 部署后自动获得 xxxx.pages.dev 网址</span></div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="step">
+        <div class="title"><span class="snum">7.3</span>最终交付</div>
+        <div class="desc">
+          🎯 客户通过网址直接访问，无需安装任何软件<br>
+          🎯 手机/电脑/平板均可打开<br>
+          🎯 后续更新：修改 content → 运行 <code>generate.py</code> → <code>git push</code> → 自动更新
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 项目结构 -->
+  <div class="section-title">📁 最终项目文件结构</div>
+  <div class="file-tree">
+<span class="d">操作手册/</span>
+├── <span class="h">index.html</span>              ← 首页
+├── <span class="h">generate.py</span>             ← ⭐ 核心生成器
+├── server.py                    ← HTTP 服务器
+├── 启动服务器.bat
+├── CHANGELOG.md                 ← 版更记录
+├── <span class="d">css/</span>
+│   └── style.css                ← 全局样式
+├── <span class="d">js/</span>
+│   └── main.js                  ← 交互脚本
+├── <span class="d">pages/</span>
+│   ├── <span class="h">injection.html</span>         ← 注塑车间
+│   ├── <span class="h">assembly.html</span>          ← 组装车间
+│   ├── <span class="h">equipment.html</span>         ← 设备维保
+│   ├── <span class="h">mold.html</span>              ← 模具维保
+│   ├── <span class="h">quality.html</span>           ← 质量检验
+│   ├── aps-monthly.html         ← APS月度产能
+│   └── aps-workshop.html        ← APS车间排产
+└── <span class="d">images/</span>
+    ├── production-injection/    ← 注塑截图
+    ├── production-assembly/     ← 组装截图
+    ├── equipment/               ← 设备维保截图
+    ├── mold/                    ← 模具维保截图
+    └── quality/                 ← 质量检验截图
+  </div>
+
+  <!-- 核心理念 -->
+  <div class="section-title">💡 核心理念</div>
+  <div class="tip-box">
+    <div class="tt">📌 内容与样式分离</div>
+    <div class="dd">
+      所有操作步骤写在 Python dict 中，样式写在 CSS 中，模板写在 HTML 模板中。
+      修改内容只需改 CONTENT 字典 → 运行 generate.py → 重新部署，3 步完成更新。
+    </div>
+  </div>
+  <div class="tip-box" style="border-left-color:#f59e0b;">
+    <div class="tt">📌 自动化思维</div>
+    <div class="dd">
+      不用手动写每个 HTML 页面，而是写一个生成器。新增模块只需在 CONTENT 中添加一个字典条目，
+      生成器自动处理：渲染页面 + 生成流程图 + 更新首页导航 + 生成侧边栏。
+    </div>
+  </div>
+  <div class="tip-box" style="border-left-color:#10b981;">
+    <div class="tt">📌 版本控制</div>
+    <div class="dd">
+      每次修改都用 Git 提交，CHANGELOG.md 记录每次变更内容。出现问题可以随时回退到上一个版本。
+      推送到 GitHub 后 Cloudflare 自动部署，客户立即看到最新版。
+    </div>
+  </div>
+
+  <footer>
+    <p>美诗儿（浙江）环境智能电器有限公司 · ESOP 制作流程指南</p>
+    <p style="margin-top:4px;">版本 v2.1 · 2026 年 7 月</p>
+  </footer>
+</div>
+</body>
+</html>
