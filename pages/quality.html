@@ -394,6 +394,12 @@
   <h3 class="step-group-title">4. 异常单处置</h3>
   <div class="sub-step-header">4.1 配置异常处理小组</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.1异常处置小组绑定.png" alt="异常处置小组绑定界面">
+        <figcaption>异常处置小组绑定界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>【操作人员：质量管理员】<br><br>在 Web 后端配置异常处理小组，设定不良率区间与处理小组的对应关系：<br>• 不良率 0~5% → A组<br>• 不良率 5~10% → B组<br>• 不良率 10%以上 → C组<br><br>同时指定各小组对应的检查群组和通知群组。配置完成后，当异常单发送时，系统根据不良率自动匹配对应的处理小组。</div>
       <div class="step-remark"><strong>备注：</strong>不良率区间不能重叠，系统会自动校验。一个异常处理小组可绑定多个通知群组。</div>
@@ -408,6 +414,16 @@
   </div>
   <div class="sub-step-header">4.3 发送异常单（前端作业平台）</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.2-1 工序检验.png" alt="工序检验界面">
+        <figcaption>工序检验界面</figcaption>
+      </figure>
+      <figure class="step-figure">
+        <img src="../images/quality/4.2-2 发起异常单.png" alt="发起异常单界面">
+        <figcaption>发起异常单界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>【操作人员：现场作业人员】<br><br>在【作业人员工作平台】发现质量异常时，点击【发送异常】按钮，弹出异常单发送窗口。依次操作：<br>① 选择当前生产工单<br>② 选择设备编号<br>③ 填写异常原因（可从异常原因库中选择或手动输入）<br>④ 填写不良数量<br><br>系统自动计算不良率，根据配置的处理小组规则匹配对应的处理小组。确认后异常单发送成功，自动推送至对应小组的待办列表。</div>
       <div class="step-remark"><strong>备注：</strong>不良率 = 不良数量 ÷ 生产总数 × 100%。</div>
@@ -415,6 +431,12 @@
   </div>
   <div class="sub-step-header">4.4 异常单自动指派</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.3异常单指派.png" alt="异常单指派界面">
+        <figcaption>异常单指派界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>【执行方式：系统自动】<br><br>异常单发送成功后，系统根据以下规则自动指派：<br>• 根据不良率区间匹配对应的处理小组<br>• 自动跳过资源黑名单中的人员<br>• 指派给对应小组的可用人员<br><br>同时支持配置超时升级规则：当异常单在某个环节超时未处理时，系统自动升级至上级处理人，确保异常不被遗漏。</div>
       <div class="step-remark"><strong>备注：</strong>自动指派无需人工干预。超时升级每触发一次自动记录升级日志。</div>
@@ -422,6 +444,12 @@
   </div>
   <div class="sub-step-header">4.5 未确认 → 异常单签收</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.4异常单指派确认.png" alt="异常单指派确认界面">
+        <figcaption>异常单指派确认界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>【操作人员：被指派小组/处理人员】<br><br>在 H5 端【异常处置】模块的「未确认」页签中查看系统自动指派的异常单：<br>① 查看异常单详情（异常原因、不良率、工单信息等）<br>② 确认异常信息无误后，点击【签收】<br>③ 异常单状态变更为「待处理」，进入处置环节<br><br>如需调整，也可手动将异常单指派给其他人员。</div>
       <div class="step-remark"><strong>备注：</strong>签收后不可随意退回，确保处置责任到人。</div>
@@ -429,6 +457,12 @@
   </div>
   <div class="sub-step-header">4.6 待处理 → 处置对策录入</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.5异常单处置确认.png" alt="异常单处置确认界面">
+        <figcaption>异常单处置确认界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>【操作人员：被指派小组/处理人员】<br><br>在「待处理」页签查看异常单详情，填写处置对策：<br>① 填写具体的处理措施和方案（支持文字描述和附件上传）<br>② 提交处置对策<br>③ 异常单流转至「待审批」状态</div>
       <div class="step-remark"><strong>备注：</strong>处置对策需详细说明如何处理本次异常，方便主管审核。</div>
@@ -436,6 +470,12 @@
   </div>
   <div class="sub-step-header">4.7 待审批 → 主管签核</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.6异常单审批.png" alt="异常单审批界面">
+        <figcaption>异常单审批界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>【操作人员：主管】<br><br>在「待审批」页签查看处置对策，判断处置结果是否合理：<br><br>✅ 若处置对策合理 → 点击【签核通过】→ 异常单流转至「待验收」状态<br>❌ 若处置对策不合理 → 点击【退回】→ 异常单回到「待处理」状态，被指派小组需重新填写对策</div>
       <div class="step-remark"><strong>备注：</strong>主管签核是确保处置对策合理性的关键环节。签核通过后不可再修改。</div>
@@ -443,6 +483,12 @@
   </div>
   <div class="sub-step-header">4.8 待验收 → 处置结果验证</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.7异常单验收.png" alt="异常单验收界面">
+        <figcaption>异常单验收界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>【操作人员：第一群组】<br><br>在「待验收」页签收到处置完成通知后，对处置结果进行验证：<br><br>✅ 验证结果 OK → 填写验证耗时和验证说明 → 核准处置记录 → 异常单进入「已关闭」状态<br>❌ 验证结果 NG → 打回至「待处理」状态，被指派小组需重新录入对策</div>
       <div class="step-remark"><strong>备注：</strong>NG 打回后异常单回到「待处理」状态，被指派小组重新填写对策。</div>
@@ -450,6 +496,12 @@
   </div>
   <div class="sub-step-header">4.9 异常单结案</div>
   <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/quality/4.8异常单结案.png" alt="异常单结案界面">
+        <figcaption>异常单结案界面</figcaption>
+      </figure>
+    </div>
     <div class="step-pair-text">
       <div class="step-desc"><strong>作业说明：</strong>处置验证通过后，异常单状态变更为「已关闭」，处置流程结束。<br><br>已关闭的异常单可在「已关闭」页签查询历史记录，包含：<br>• 完整的处置过程<br>• 处置对策<br>• 验证记录<br>• 各环节耗时信息</div>
       <div class="step-remark"><strong>备注：</strong>已关闭的异常单不支持再次修改，仅可查看历史记录。</div>
