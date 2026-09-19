@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSE019 半成品组装-开批派工流程 - MES操作指导书</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-home-link">
+          <h2 class="sidebar-title">美诗儿 MES 操作指导书</h2>
+        </a>
+      </div>
+      <nav class="sidebar-modules">
+        <ul>
+                      <li><a href="MSE001.html">MSE001 注塑-开批派工流程</a></li>
+            <li><a href="MSE002.html">MSE002 注塑-产前准备流程</a></li>
+            <li><a href="MSE003.html">MSE003 注塑-生产报工流程</a></li>
+            <li><a href="MSE004.html">MSE004 注塑-手动报工流程</a></li>
+            <li><a href="MSE005.html">MSE005 注塑-PQC检验流程</a></li>
+            <li><a href="MSE006.html">MSE006 注塑-PQC不合格处理流程</a></li>
+            <li><a href="MSE007.html">MSE007 注塑-在库返工流程</a></li>
+            <li><a href="MSE008.html">MSE008 注塑-报废流程</a></li>
+            <li><a href="MSE009.html">MSE009 组装-开批派工流程</a></li>
+            <li><a href="MSE010.html">MSE010 组装-各工序对应设备上料</a></li>
+            <li><a href="MSE011.html">MSE011 组装-产前准备流程</a></li>
+            <li><a href="MSE012.html">MSE012 组装-生产报工流程</a></li>
+            <li><a href="MSE013.html">MSE013 组装-工序自检及异常单处置流程</a></li>
+            <li><a href="MSE014.html">MSE014 组装-手动报工流程</a></li>
+            <li><a href="MSE015.html">MSE015 组装-PQC检验流程</a></li>
+            <li><a href="MSE016.html">MSE016 组装-PQC不合格处理流程</a></li>
+            <li><a href="MSE017.html">MSE017 组装-在库返工流程1</a></li>
+            <li><a href="MSE018.html">MSE018 组装-报废流程1</a></li>
+            <li><a href="MSE019.html" class="active">MSE019 半成品组装-开批派工流程</a></li>
+            <li><a href="MSE020.html">MSE020 半成品组装-各工序对应设备上料</a></li>
+            <li><a href="MSE021.html">MSE021 半成品组装-产前准备流程</a></li>
+            <li><a href="MSE022.html">MSE022 半成品组装-生产报工流程</a></li>
+            <li><a href="MSE023.html">MSE023 半成品组装-PQC检验</a></li>
+            <li><a href="MSE024.html">MSE024 半成品组装-PQC检验不合处理流程</a></li>
+            <li><a href="MSE025.html">MSE025 半成品-在库返工流程</a></li>
+            <li><a href="MSE026.html">MSE026 半成品-报废流程</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <nav class="sidebar-sections">
+        <div class="sidebar-section-label">本页目录</div>
+        <ul>
+          <li><a href="#flow">流程图</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content" id="main-content">
+      <header class="page-header">
+        <h1>MSE019 半成品组装-开批派工流程</h1>
+        <div class="meta-info">责任部门：生产-半成品组装　|　流程入口：—　|　数据流向：APS/MES/WMS</div>
+      </header>
+      <div class="sections">
+        <section class="doc-section" id="def">
+          <h2 class="section-title">流程定义</h2>
+          <div class="section-content scenario-content">
+            <p>1. MES 接收 APS 开批信息拆批；依据 APS 派工底稿派工。2. 若物料不齐套，MES 不可以执行派工，指定账号可以解锁强制派工。3. 派工后叫料，将 APS 排产工单及数量所需的用料信息通知 WMS 备料送料；接口：叫料叫模接口，用「任务类型—OrderType」字段做区分，是叫料还是叫模。</p>
+          </div>
+        </section>
+        <section class="doc-section" id="flow">
+          <h2 class="section-title">流程图</h2>
+          <div class="section-content flowchart-content">
+            <img class="sop-image" src="../images/sop/MSE019_半成品组装-开批派工流程.png" alt="MSE019 半成品组装-开批派工流程" loading="lazy">
+          </div>
+        </section>
+      </div>
+      <footer class="page-footer">
+        <p>美诗儿（浙江）环境智能电器有限公司 - MES 操作指导书</p>
+        <p class="footer-edit-hint">SOP 全本（26 份合订）见
+          <a href="../assets/美诗儿MES-SOP(26份)_纵向A3.pdf">PDF</a></p>
+      </footer>
+    </main>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>

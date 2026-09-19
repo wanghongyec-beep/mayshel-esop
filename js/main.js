@@ -120,7 +120,7 @@ function initImageZoom() {
     document.body.appendChild(overlay);
 
     // 点击图片 → 放大
-    document.querySelectorAll('.step-figure img, .flowchart-figure img, .step-pair-img img').forEach(function(img) {
+    document.querySelectorAll('.step-figure img, .flowchart-figure img, .step-pair-img img, .sop-image').forEach(function(img) {
         img.addEventListener('click', function(e) {
             e.stopPropagation();
             overlayImg.src = this.src;

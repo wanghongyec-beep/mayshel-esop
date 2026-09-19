@@ -655,3 +655,16 @@ code {
         margin-left: 0;
     }
 }
+
+/* --- SOP 流程图 --- */
+.sop-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    cursor: zoom-in;
+}
