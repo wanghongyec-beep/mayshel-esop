@@ -71,7 +71,7 @@
       </section>      <section class="doc-section" id="flowchart">
         <h2 class="section-title">流程图</h2>
         <div class="section-content flowchart-content">
-<svg class="flowchart-svg" viewBox="0 0 836 172" xmlns="http://www.w3.org/2000/svg">
+<svg class="flowchart-svg" viewBox="0 0 836 196" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#1a73e8"/>
@@ -111,8 +111,20 @@
   <text x="521" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">3. 产线点检</text>
   <line x1="606" y1="34" x2="626" y2="34" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
   <rect x="444" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
-  <text x="521" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.1 执行设备点检</text>
+  <text x="521" y="71" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.1 设置设备点检表</text>
   <line x1="521" y1="48" x2="521" y2="58" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="444" y="82" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="521" y="95" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.2 进入设备点检设置</text>
+  <line x1="521" y1="78" x2="521" y2="82" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="444" y="106" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="521" y="119" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.3 设置点检表与卡控</text>
+  <line x1="521" y1="102" x2="521" y2="106" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="444" y="130" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="521" y="143" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.4 点检卡控说明</text>
+  <line x1="521" y1="126" x2="521" y2="130" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <rect x="444" y="154" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="521" y="167" text-anchor="middle" fill="#1a73e8" font-size="9" font-weight="500">3.5 执行设备点检</text>
+  <line x1="521" y1="150" x2="521" y2="154" stroke="#1a73e8" stroke-width="1" marker-end="url(#arrowhead)"/>
   <rect x="642" y="20" width="170" height="28" rx="6" fill="#1a73e8" filter="url(#shadow)"/>
   <text x="727" y="38" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">4. 报工作业</text>
   <rect x="650" y="58" width="155" height="20" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
@@ -222,7 +234,63 @@
     </div>
   </div>
   <h3 class="step-group-title">3. 产线点检</h3>
-  <div class="sub-step-header">3.1 执行设备点检</div>
+  <div class="sub-step-header">3.1 设置设备点检表</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/dj-00.png" alt="设备点检表设置（新增/编辑点检表与明细）">
+        <figcaption>设备点检表设置（新增/编辑点检表与明细）</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>在【设备点检表设置】作业中新增或编辑点检表：点【添加】新建点检表（填写点检表编号、点检表名称），再在下方「设备点检表明细」中点【添加】逐条维护检查项目（检查项次、检查项目、检查方法、检查标准、是否上传文件、最小值/最大值、点检时下询等）。也可点【编辑】修改现有内容、点【删除】移除，或通过【导入】用模板批量导入。</div>
+      <div class="step-remark"><strong>备注：</strong>点检表可被多台设备共用。维护完成后需【签核】才会生效。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">3.2 进入设备点检设置</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/dj-01.png" alt="设备基础资料 → 设备点检设置入口">
+        <figcaption>设备基础资料 → 设备点检设置入口</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>进入【设备基础数据】作业，选中需要设置点检的设备，点击上方【设备点检设置】按钮，弹出「设备基础数据 / 设备点检设置」界面。</div>
+      <div class="step-remark"><strong>备注：</strong>该按钮在设备基础数据列表的工具条上，需先选中一台设备。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">3.3 设置点检表与卡控</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/dj-02.png" alt="设备点检设置作业（选择点检表与卡控）">
+        <figcaption>设备点检设置作业（选择点检表与卡控）</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>在「设备点检设置」界面点【添加】新增一条：选择设备编号、点检频率（如「日」）、点检表编号（如 002），并设置「点检管控」（不检验 / 仅警告 / 需检验 / 需检验通过），选择是否启用，最后点【确认】保存。</div>
+      <div class="step-remark"><strong>备注：</strong>同一台设备可设置多条点检设置（不同频率/点检表）。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">3.4 点检卡控说明</div>
+  <div class="step-pair">
+    <div class="step-pair-imgs">
+      <figure class="step-figure">
+        <img src="../images/production-assembly/dj-03.png" alt="点检管控选项说明">
+        <figcaption>点检管控选项说明</figcaption>
+      </figure>
+    </div>
+    <div class="step-pair-text">
+      <div class="step-desc"><strong>作业说明：</strong>「点检管控」四个选项的含义：
+· 不检验：可不进行设备点检；
+· 仅警告：不执行设备点检，进站时弹窗提示，不卡控进站；
+· 需检验：需执行设备点检才能进站，不卡控点检项是否合格；
+· 需检验通过：需执行设备点检，且检验项全部合格才能进站。</div>
+      <div class="step-remark"><strong>备注：</strong>按现场管理要求选择；一般产线建议用「需检验通过」。</div>
+    </div>
+  </div>
+  <div class="sub-step-header">3.5 执行设备点检</div>
   <div class="step-pair">
     <div class="step-pair-imgs">
       <figure class="step-figure">
