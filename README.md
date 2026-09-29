@@ -15,7 +15,7 @@ MES 操作指导书 - 美诗儿(浙江)环境智能电器有限公司
 |------|------|---------|
 | **MES** | 注塑 / 组装 / 设备维保 / 模具维保 / 质量检验 — 5 个操作手册 | `generate.py` |
 | **APS** | 月度产能规划 + 车间排产规划 — 2 个操作手册 | `generate.py` |
-| **SOP** | MSE001–MSE026 — 26 份标准作业流程 | `gen_sop.py` |
+| **SOP** | MSE046–MSE071 — 26 份标准作业流程（按部门分 4 份） | `gen_sop.py` |
 | **培训** | ESOP 从0到1制作流程 / ESOP制作流程指南 / 制作流程说明 | 独立 HTML |
 
 **操作手册 vs SOP 的区别：**
@@ -29,7 +29,7 @@ MES 操作指导书 - 美诗儿(浙江)环境智能电器有限公司
 
 ```
 mayshel-esop/
-├── index.html              # 首页（MES + APS + SOP 入口，手工维护）
+├── index.html              # 首页（MES + APS 入口，手工维护；SOP 不在此列）
 ├── css/style.css           # 全局样式
 ├── js/main.js              # 交互脚本（ScrollSpy + Lightbox + toggleNav）
 ├── generate.py             # 操作手册生成器（内容内置在 CONTENT 字典）
@@ -45,7 +45,7 @@ mayshel-esop/
 │   ├── quality.html        # MES - 质量检验操作手册
 │   ├── aps-monthly.html    # APS - 月度产能规划版本
 │   ├── aps-workshop.html   # APS - 车间排产规划版本
-│   └── MSE001.html … MSE026.html   # SOP - 26 份标准作业流程
+│   └── MSE046.html … MSE071.html   # SOP - 26 份标准作业流程
 ├── images/
 │   ├── production-injection/   # 注塑车间截图
 │   ├── production-assembly/    # 组装车间截图
@@ -55,7 +55,10 @@ mayshel-esop/
 │   ├── aps/                    # APS 截图
 │   └── sop/                    # SOP 流程图（26 张，1500px 宽）
 └── assets/
-    └── 美诗儿MES-SOP(26份)_纵向A3.pdf   # SOP 合订本（A3 横向，26 页）
+    ├── 注塑.pdf           # SOP 合订本（A3，6 页）
+    ├── 成品组装.pdf        # SOP 合订本（A3，7 页）
+    ├── 半成品组装.pdf      # SOP 合订本（A3，6 页）
+    └── 质检.pdf           # SOP 合订本（A3，7 页）
 ```
 
 ---
@@ -68,13 +71,12 @@ mayshel-esop/
 python generate.py
 ```
 
-> ⚠️ `generate.py` 的 `generate_index()` 会整套重写 `index.html`，而 `index.html` 目前是**手工维护**的
-> （含 MES / APS / SOP 三个分组，以及 SOP 的 26 张卡片）。改完若发现首页分组或卡片丢了，
-> 用 `git checkout index.html` 恢复再手工补。
+> ⚠️ `generate.py` 的 `generate_index()` 会整套重写 `index.html`，而 `index.html` 是**手工维护**的。
+> 改完若发现首页结构丢了，用 `git checkout index.html` 恢复。
 
 ---
 
-## SOP 的维护（MSE001–MSE026）
+## SOP 的维护（MSE046–MSE071）
 
 **不要手改 `pages/MSE*.html`** —— 它们是生成物，要改源头。
 
@@ -86,8 +88,10 @@ D:\Code\_sop_work\          ← SOP 生成器（不在本仓库）
 ├── align_rows.py                  # 跨泳道连线自动对齐
 ├── gen.py                         # .drawio 生成器
 ├── check.py / check_lane.py       # 校验器（改完必跑）
-├── make_web.py                    # 生成网页用图 + PDF → web/
-└── export_for_repo.py             # 导出 sop_data.json
+├── codes.py                       # 流程编号映射（一流程一号）
+├── roles.py                       # 操作角色指派（右下角色块）
+├── _web2.py                       # 生成网页用图 + 4 份 PDF → web2/
+└── build_cover.py / build_groups.py  # 按部门合并 drawio/PDF + 加清单封面
 ```
 
 完整重建步骤：
@@ -106,17 +110,21 @@ for f in out/*.drawio; do
     --output "png/$(basename "$f" .drawio).png" "$(pwd)/$f"
 done
 
-# 3) 生成网页用图 + PDF，并导出清单
-python make_web.py                   # → web/images/*.png + web/*.pdf
-python export_for_repo.py ../mayshel-esop/sop_data.json
+# 3) 按部门合并 + 加清单封面
+python build_groups.py grouped
+for f in grouped/*.drawio; do "D:/drawio/draw.io/draw.io.exe" --export \n  --format pdf --all-pages --crop --output "grouped/$(basename "$f" .drawio).pdf" "$(pwd)/$f"; done
+python build_cover.py                # → final/*.pdf（含清单封面）
 
-# 4) 拷进本仓库并生成页面
-cp -r web/images/*  ../mayshel-esop/images/sop/
-cp web/*.pdf        ../mayshel-esop/assets/
-cd ../mayshel-esop
-python gen_sop.py sop_data.json      # → pages/MSE001.html … MSE026.html
+# 4) 生成网页用图 + 清单
+python _web2.py                      # → web2/images/*.png + web2/*.pdf + sop_data.json
 
-# 5) 更新首页 index.html（手工：SOP 分组与卡片）
+# 5) 拷进本仓库并生成页面
+cp web2/images/*.png  ../mayshel-esop/images/sop/
+cp web2/*.pdf         ../mayshel-esop/assets/
+cp sop_data.json      ../mayshel-esop/
+cd ../mayshel-esop && python gen_sop.py sop_data.json   # → pages/MSE046 … MSE071
+
+# 6) 首页 index.html **不含 SOP**（客户要求），无需改动
 ```
 
 改**单条** SOP 时，只要动 `flows_all.py` / `flows_rest.py` 里对应那段，再跑 1)–5)。
@@ -136,8 +144,9 @@ python gen_sop.py sop_data.json      # → pages/MSE001.html … MSE026.html
 
 ## SOP 排版约定（改生成器前必读）
 
-- **版式**复用《美诗儿SOP模板1.drawio》：表头信息栏 / 流程定义条 / 阶段轴 / 系统泳道 / 关键作业说明列 / 标准图例。
-- **字号**：公司名 33.87 / 表头·流程定义·说明 15.4 / 图形文字 11.29 / 色带 10.5 / 图例标题 14.0 / 阶段 12.5 / Y-N 11.29。
+- **版式**复用《美诗儿SOP模板.drawio》：表头信息栏 / 流程定义条 / 系统泳道 / 关键作业说明列 / 标准图例。
+  （左侧「阶段」竖条已按客户要求删除）
+- **字号**：公司名 33.87 / 表头·流程定义·说明 15.4 / 图形文字 11.29 / 色带 10.5 / 图例 9.88（标题 12.7）/ Y-N 11.29。
 - **跨泳道箭头（箭头不能叠在一起）**：
   - 跨泳道且同一行 → 一笔**水平**直连
   - 跨泳道且目标在下方 → 源方块**下边**引出 → 横向 → 目标方块**上边**进入
@@ -149,7 +158,7 @@ python gen_sop.py sop_data.json      # → pages/MSE001.html … MSE026.html
 
 ### 返工 / 报废流程的特殊约定
 
-**ERP 下工单之后都需要 APS 排产**。MSE007 / MSE008 / MSE017 / MSE018 / MSE025 / MSE026 六条已统一为：
+**ERP 下工单之后都需要 APS 排产**。注塑-在库返工/报废、组装-在库返工1/报废1、半成品-在库返工/报废 六条已统一为：
 
 ```
 QMS 判定 → WMS 移库 → ERP 下工单 → APS 排产并补发生产批 → MES 执行
@@ -175,5 +184,5 @@ git push origin main
 
 ## 体积注意
 
-SOP 图已按 1500px 宽 + 128 色 PNG 压缩（`images/sop` 约 5.8M），
-PDF 按 A3 横向 120dpi 生成（约 6.4M）。**再加大图前先确认是否必要**，仓库不是图床。
+SOP 图已按 1500px 宽 + 128 色 PNG 压缩（`images/sop` 约 6M），
+PDF 4 份合计约 3.5M。**再加大图前先确认是否必要**，仓库不是图床。

@@ -22,7 +22,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PAGES_DIR = os.path.join(BASE_DIR, "pages")
 IMG_DIR = "images/sop"
-PDF_NAME = "美诗儿MES-SOP(26份)_纵向A3.pdf"
+# PDF 合订本按部门分 4 份，文件名由 sop_data.json 的 pdf 字段给出
 
 PAGE_TMPL = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -108,7 +108,7 @@ def render_page(s, sops):
         definition=esc(s["definition"]),
         img="%s/%s" % (IMG_DIR, s["image"]),
         module_nav=sop_nav(sops, s["code"]),
-        pdf=PDF_NAME,
+        pdf=s.get('pdf', ''),
     )
 
 
